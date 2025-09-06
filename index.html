@@ -13,76 +13,84 @@
     <link type="text/css" rel="stylesheet" href="./res/styles.css">
   </head>
   <body>
-    <!-- Background -->
+    <!-- Background image -->
     <div class="bg-image"></div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="floating-signup__wrap">
-        <div class="floating-signup rel">
-          <div class="container-fluid rel">
-            <div class="row">
-              <div class="user-signup__intro">
-                <h1>Thank you!</h1>
-                <p>Your free guide is on its way and will arrive in your mailbox within five minutes.  
-                Check your SPAM folder if it doesn’t arrive within that timeframe!</p>
-                <img src="res/clean-hr.png" alt="" class="clean-hr">
-                <span style="font-size: 22px; font-weight: 600; display:block; margin-top:10px;">
-                  Want To Know What We Could Do For You?
-                </span>
-                <p class="sub-note">
-                  Fill out the form and we’ll get back to you.  
-                  No obligations, no annoying high pressure sales tactics.  
-                  We both have better things to do.
-                </p>
+    <div>
+      <div id="loading" class="loading-state" style="display: none;"></div>
+      <div>
+        <section>
+          <div class="floating-signup__wrap col-xs-12 col-md-6 col-xs-offset-0 col-md-offset-3 floaty-vertical--middle floaty-horizontal--center floaty-unfloat-at--xs">
+            <div class="floating-signup rel">
+              <div class="container-fluid rel">
+                <div class="row">
+                  <div class="user-signup__intro">
+                    <h1 style="text-align: center;">Thank you!</h1>
+                    <p style="text-align: center;">Your free guide is on its way and will arrive in your mailbox within five minutes.  
+                    Check your SPAM folder if it doesn’t arrive within that timeframe!</p>
+                    <p style="text-align: center;">
+                      <img src="res/clean-hr.png" alt="" class="clean-hr insert--image wrap-off-align-center">
+                      <span style="font-size: 22px; font-weight: 600; display:block; margin-top:10px;">
+                        Want To Know What We Could Do For You?
+                      </span>
+                    </p>
+                    <p class="sub-note">
+                      Fill out the form and we’ll get back to you.  
+                      No obligations, no annoying high pressure sales tactics.  
+                      We both have better things to do.
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+
+<!-- Contact form -->
+<form id="my-form" action="https://formspree.io/f/xgvlrekj" method="POST" class="form form-horizontal user-signup__form contact-card" novalidate>
+  <div class="contact-grid">
+    <div class="contact-field">
+      <label for="name" class="contact-label">Your name</label>
+      <input type="text" id="name" name="name" class="form-control contact-input" placeholder="Jane Doe" required>
+    </div>
+    <div class="contact-field">
+      <label for="email" class="contact-label">Your email</label>
+      <input type="email" id="email" name="email" class="form-control contact-input" placeholder="you@example.com" required>
+    </div>
+    <div class="contact-field contact-field--full">
+      <label for="subject" class="contact-label">Your subject</label>
+      <input type="text" id="subject" name="subject" class="form-control contact-input" placeholder="What’s this about?" required>
+    </div>
+    <div class="contact-field contact-field--full">
+      <label for="message" class="contact-label">Your message</label>
+      <textarea id="message" name="message" class="form-control contact-textarea" rows="5" placeholder="Write your message..." required></textarea>
+    </div>
+
+    <!-- Honeypot -->
+    <input type="text" name="company" class="contact-hp" tabindex="-1" autocomplete="off">
+
+    <div class="contact-actions contact-field--full">
+      <button id="my-form-button" type="submit" class="btn btn-default submit user-signup__submit contact-button" aria-live="polite">
+        <span class="btn-text">Send message</span>
+        <span class="btn-progress" aria-hidden="true">Sending…</span>
+      </button>
+      <p id="my-form-status" class="contact-status" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <!-- Thank you message (visible after success) -->
+  <div id="thank-you-message" class="thank-you" style="display:none; text-align:center; margin-top:20px;">
+    <h2>Thank you!</h2>
+    <p>Your free guide is on its way and will arrive in your mailbox within five minutes.  
+    If it doesn’t arrive within that timeframe, please check your spam folder.</p>
+  </div>
+</form>
+<!-- End Contact form -->
+
+                </div>
               </div>
             </div>
-            <div class="row">
-              <!-- Contact form -->
-              <form id="my-form" action="https://formspree.io/f/xgvlrekj" method="POST" class="form form-horizontal user-signup__form contact-card" novalidate>
-                <div class="contact-grid">
-                  <div class="contact-field">
-                    <label for="name" class="contact-label">Your name</label>
-                    <input type="text" id="name" name="name" class="form-control contact-input" placeholder="Jane Doe" required>
-                  </div>
-                  <div class="contact-field">
-                    <label for="email" class="contact-label">Your email</label>
-                    <input type="email" id="email" name="email" class="form-control contact-input" placeholder="you@example.com" required>
-                  </div>
-                  <div class="contact-field contact-field--full">
-                    <label for="subject" class="contact-label">Your subject</label>
-                    <input type="text" id="subject" name="subject" class="form-control contact-input" placeholder="What’s this about?" required>
-                  </div>
-                  <div class="contact-field contact-field--full">
-                    <label for="message" class="contact-label">Your message</label>
-                    <textarea id="message" name="message" class="form-control contact-textarea" rows="5" placeholder="Write your message..." required></textarea>
-                  </div>
-
-                  <!-- Honeypot -->
-                  <input type="text" name="company" class="contact-hp" tabindex="-1" autocomplete="off">
-
-                  <div class="contact-actions contact-field--full">
-                    <button id="my-form-button" type="submit" class="btn btn-default submit user-signup__submit contact-button" aria-live="polite">
-                      <span class="btn-text">Send message</span>
-                      <span class="btn-progress" aria-hidden="true">Sending…</span>
-                    </button>
-                    <p id="my-form-status" class="contact-status" role="status" aria-live="polite"></p>
-                  </div>
-                </div>
-
-                <!-- Thank you message (visible after success) -->
-                <div id="thank-you-message" class="thank-you" style="display:none; text-align:center; margin-top:20px;">
-                  <h2>Thank you!</h2>
-                  <p>Your free guide is on its way and will arrive in your mailbox within five minutes.  
-                  If it doesn’t arrive within that timeframe, please check your spam folder.</p>
-                </div>
-              </form>
-              <!-- End Contact form -->
-            </div>
           </div>
-        </div>
+        </section>
       </div>
-    </section>
+    </div>
 
 <script>
   (function() {
@@ -116,7 +124,7 @@
           form.reset();
           status.className = "contact-status contact-status--success";
           status.textContent = "";
-          thankYou.style.display = "block";
+          thankYou.style.display = "block"; // show thank you section
         } else {
           var payload = {};
           try { payload = await response.json(); } catch(e) {}
