@@ -5,7 +5,7 @@
 html, body { height: 100%; }
 
 :root{
-  --maxw: 960px;
+  --maxw: 960px;          /* comfy desktop width */
   --pad-sm: 16px;
   --pad-md: 24px;
   --pad-lg: 40px;
@@ -25,14 +25,13 @@ body{
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 /* ---------- Background image ---------- */
 .bg-image{
   position: fixed;
   inset: 0;
-  background-image: url("background.jpg");
+  background-image: url("background.jpg"); /* CSS file is inside /res, so this points to /res/background.jpg */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -40,16 +39,22 @@ body{
   z-index: -1;
 }
 
+/* iOS: avoid jank with fixed backgrounds on scroll */
+/* Uncomment if you notice iOS “zoom” on scroll */
+/*
+@supports (-webkit-touch-callout: none) {
+  .bg-image { background-attachment: scroll; }
+}
+*/
+
 /* ---------- Typography ---------- */
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3{
   font-family: 'Bebas Neue', 'Montserrat', sans-serif;
   letter-spacing: .5px;
   text-transform: uppercase;
   margin: 0 0 10px;
   line-height: 1.05;
 }
-h1{ font-size: clamp(40px, 6vw, 64px); }
-h2{ font-size: clamp(28px, 4vw, 40px); }
 
 p{ margin: 0 0 12px; }
 
@@ -62,6 +67,7 @@ p{ margin: 0 0 12px; }
   text-align: center;
 }
 
+/* “Thank you” confirmation block */
 .thank-you h2{
   font-family: 'Bebas Neue', 'Montserrat', sans-serif;
   font-size: 28px;
@@ -73,36 +79,31 @@ p{ margin: 0 0 12px; }
   color: rgba(255,255,255,0.9);
 }
 
-/* Decorative line */
+/* Decorative line image: center & even */
 .clean-hr{
-  display:block;
-  width: 240px;
+  display: block;
+  width: 240px;          /* adjust length here */
   max-width: 70%;
-  height:auto;
-  margin: 18px auto 10px;
-  opacity:.85;
-}
-@media (max-width: 768px){
-  .clean-hr{ width: 200px; }
-}
-@media (max-width: 420px){
-  .clean-hr{ width: 180px; }
+  height: auto;
+  margin: 16px auto 10px;
+  opacity: .85;
 }
 
-/* ---------- Layout ---------- */
+/* ---------- Layout helpers from your template ---------- */
+/* Center the main content block on large screens with sensible width */
 .floating-signup__wrap{
   max-width: var(--maxw);
   margin: 0 auto;
   padding: var(--pad-lg) var(--pad-md);
 }
 
+/* Keep the intro tidy and centered */
 .user-signup__intro{
   text-align: center;
-  margin-top: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
-/* ---------- Contact form ---------- */
+/* ---------- Contact form card ---------- */
 .contact-card{
   background: var(--card-bg);
   backdrop-filter: blur(2px);
@@ -110,13 +111,14 @@ p{ margin: 0 0 12px; }
   padding: var(--pad-md);
   box-shadow: var(--shadow);
   max-width: 860px;
-  margin: 24px auto;
+  margin: 30px auto;
 }
 
+/* Grid: two columns on desktop, single on mobile */
 .contact-grid{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px;
+  gap: 16px;
 }
 .contact-field--full{ grid-column: 1 / -1; }
 
@@ -152,9 +154,6 @@ p{ margin: 0 0 12px; }
   gap: 14px;
   flex-wrap: wrap;
 }
-@media (max-width: 768px){
-  .contact-actions{ width:100%; justify-content:center; }
-}
 
 .contact-button{
   position: relative;
@@ -186,8 +185,25 @@ p{ margin: 0 0 12px; }
 /* ---------- Responsive tweaks ---------- */
 @media (max-width: 992px){
   :root{ --maxw: 820px; }
+  .floating-signup__wrap{ padding: var(--pad-lg) var(--pad-md); }
 }
+
+@media (max-width: 768px){
+  .contact-grid{ grid-template-columns: 1fr; }
+  .contact-card{ padding: var(--pad-md); margin: 24px var(--pad-sm); }
+  .floating-signup__wrap{ padding: var(--pad-lg) var(--pad-sm); }
+  .sub-note{ font-size: 18px; } /* from your original */
+  .clean-hr{ width: 200px; }
+}
+
 @media (min-width: 1200px){
   :root{ --maxw: 1040px; }
   .contact-card{ padding: 32px; }
+  h1{ font-size: 64px; }
+  h2{ font-size: 40px; }
+}
+
+@media (max-width: 420px){
+  h1{ font-size: 40px; }
+  .clean-hr{ width: 180px; }
 }
