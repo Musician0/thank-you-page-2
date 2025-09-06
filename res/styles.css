@@ -20,7 +20,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("background.jpg"); /* important fix */
+  background-image: url("background.jpg"); /* fixed path */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -33,6 +33,19 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3 {
   font-family: 'Bebas Neue', 'Montserrat', sans-serif;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+}
+
+/* Sub-note paragraph */
+.sub-note {
+  margin-top: 8px;
+  margin-bottom: 16px;
+  color: rgba(255,255,255,0.92);
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .sub-note { font-size: 18px; }
 }
 
 /* Contact form styling */
