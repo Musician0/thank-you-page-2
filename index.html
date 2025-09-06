@@ -80,6 +80,13 @@
       <p id="my-form-status" class="contact-status" role="status" aria-live="polite"></p>
     </div>
   </div>
+
+  <!-- Thank you message (visible after success) -->
+  <div id="thank-you-message" class="thank-you" style="display:none; text-align:center; margin-top:20px;">
+    <h2>Thank you!</h2>
+    <p>Your free guide is on its way and will arrive in your mailbox within five minutes. 
+    If it doesn’t arrive within that timeframe, please check your spam folder.</p>
+  </div>
 </form>
 <!-- End Contact form -->
 
@@ -97,6 +104,7 @@
     if (!form) return;
 
     var status = document.getElementById("my-form-status");
+    var thankYou = document.getElementById("thank-you-message");
     var btn = document.getElementById("my-form-button");
 
     function setLoading(loading) {
@@ -108,6 +116,7 @@
       event.preventDefault();
       setLoading(true);
       status.textContent = "";
+      thankYou.style.display = "none";
 
       try {
         var data = new FormData(form);
@@ -120,7 +129,8 @@
         if (response.ok) {
           form.reset();
           status.className = "contact-status contact-status--success";
-          status.textContent = "Thanks—your message has been sent.";
+          status.textContent = "";
+          thankYou.style.display = "block"; // show thank you section
         } else {
           var payload = {};
           try { payload = await response.json(); } catch(e) {}
