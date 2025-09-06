@@ -79,7 +79,7 @@
   </div>
 
   <!-- Thank you message (visible after success) -->
-  <div id="thank-you-message" class="thank-you" style="display:none; text-align:center; margin-top:20px;">
+  <div id="thank-you-message" class="thank-you" style="display:none; text-align:center; margin-top:20px; color:#111;">
     <h2>Thank you!</h2>
     <p>Your free guide is on its way and will arrive in your mailbox within five minutes. Check your SPAM folder if it doesn’t arrive within that timeframe!</p>
   </div>
@@ -95,7 +95,7 @@
     </div>
 
 <script>
-  (function() {
+  (function () {
     var form = document.getElementById("my-form");
     if (!form) return;
 
@@ -103,16 +103,24 @@
     var thankYou = document.getElementById("thank-you-message");
     var btn = document.getElementById("my-form-button");
 
+    // Ensure it's hidden initially
+    if (thankYou) {
+      thankYou.style.setProperty('display', 'none', 'important');
+      thankYou.style.setProperty('color', '#111');
+    }
+
     function setLoading(loading) {
-      if (loading) { btn.disabled = true; btn.classList.add("is-loading"); }
-      else { btn.disabled = false; btn.classList.remove("is-loading"); }
+      if (btn) {
+        if (loading) { btn.disabled = true; btn.classList.add("is-loading"); }
+        else { btn.disabled = false; btn.classList.remove("is-loading"); }
+      }
     }
 
     async function handleSubmit(event) {
       event.preventDefault();
       setLoading(true);
-      status.textContent = "";
-      thankYou.style.display = "none";
+      if (status) { status.textContent = ""; status.className = "contact-status"; }
+      if (thankYou) thankYou.style.setProperty('display', 'none', 'important');
 
       try {
         var data = new FormData(form);
@@ -123,23 +131,32 @@
         });
 
         if (response.ok) {
+          form.querySelector(".contact-grid")?.classList.add("visually-hidden");
+          if (thankYou) {
+            thankYou.style.setProperty('display', 'block', 'important');
+            thankYou.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+          if (status) {
+            status.className = "contact-status contact-status--success";
+            status.textContent = "Thanks! Your message was sent.";
+          }
           form.reset();
-          status.className = "contact-status contact-status--success";
-          status.textContent = "";
-          thankYou.style.display = "block"; // show thank you section
         } else {
-          var payload = {};
-          try { payload = await response.json(); } catch(e) {}
-          status.className = "contact-status contact-status--error";
-          if (payload && payload.errors) {
-            status.textContent = payload.errors.map(function(e){ return e.message; }).join(", ");
-          } else {
-            status.textContent = "Oops! There was a problem submitting your form.";
+          let payload = {};
+          try { payload = await response.json(); } catch (e) {}
+          if (status) {
+            status.className = "contact-status contact-status--error";
+            status.textContent = payload?.errors
+              ? payload.errors.map(e => e.message).join(", ")
+              : "Oops! There was a problem submitting your form.";
           }
         }
       } catch (err) {
-        status.className = "contact-status contact-status--error";
-        status.textContent = "Network error. Please try again.";
+        if (status) {
+          status.className = "contact-status contact-status--error";
+          status.textContent = "Network error. Please try again.";
+        }
+        console.error(err);
       } finally {
         setLoading(false);
       }
