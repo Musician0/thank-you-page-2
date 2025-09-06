@@ -20,7 +20,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("background.jpg"); /* fixed path */
+  background-image: url("background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -46,6 +46,18 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3 {
 }
 @media (min-width: 768px) {
   .sub-note { font-size: 18px; }
+}
+
+/* Thank you message */
+.thank-you h2 {
+  font-family: 'Bebas Neue', 'Montserrat', sans-serif;
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+.thank-you p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.9);
 }
 
 /* Contact form styling */
