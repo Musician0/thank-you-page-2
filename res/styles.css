@@ -28,7 +28,7 @@ body{
   overflow-x: hidden;
 }
 
-/* ---------- Background image ---------- */
+/* ---------- Background ---------- */
 .bg-image{
   position: fixed;
   inset: 0;
@@ -38,6 +38,15 @@ body{
   background-position: center;
   opacity: .69;
   z-index: -1;
+}
+
+/* ---------- Hero Section ---------- */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;   /* start near top */
+  padding: 60px 16px;
+  min-height: auto;          /* content defines height */
 }
 
 /* ---------- Typography ---------- */
@@ -90,13 +99,6 @@ p{ margin: 0 0 12px; }
 }
 
 /* ---------- Layout ---------- */
-.hero{
-  min-height: 100svh;
-  display: grid;
-  place-items: center;
-  padding: 0;
-}
-
 .floating-signup__wrap{
   max-width: var(--maxw);
   margin: 0 auto;
@@ -153,48 +155,4 @@ p{ margin: 0 0 12px; }
 
 .contact-hp{ display:none !important; }
 
-.contact-actions{
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-@media (max-width: 768px){
-  .contact-actions{ width:100%; justify-content:center; }
-}
-
-.contact-button{
-  position: relative;
-  min-width: 180px;
-  border-radius: 999px;
-  padding: 12px 20px;
-  font-weight: 700;
-  letter-spacing: .2px;
-  border: none;
-  color: #000;
-  background: #fff;
-  cursor: pointer;
-  transition: transform .08s ease, filter .2s ease;
-}
-.contact-button:hover{ filter: brightness(.95); }
-.contact-button:active{ transform: translateY(1px); }
-
-.contact-button .btn-progress{ display: none; margin-left: 10px; }
-.contact-button.is-loading .btn-text{ opacity: .6; }
-.contact-button.is-loading .btn-progress{ display: inline-block; }
-
-.contact-status{
-  margin: 0;
-  font-size: 14px;
-}
-.contact-status--success{ color: #1a7f37; }
-.contact-status--error{ color: #b42318; }
-
-/* ---------- Responsive tweaks ---------- */
-@media (max-width: 992px){
-  :root{ --maxw: 820px; }
-}
-@media (min-width: 1200px){
-  :root{ --maxw: 1040px; }
-  .contact-card{ padding: 32px; }
-}
+.contact-ac
